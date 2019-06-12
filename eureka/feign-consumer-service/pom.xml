@@ -11,10 +11,10 @@
   	</parent>
   	
   	<groupId>com.se2019</groupId>
-  	<artifactId>eureka-server</artifactId>
+  	<artifactId>feign-consumer-service</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-  	<name>eureka-server</name>
+  	<name>consumer-service</name>
   	
 	
   	<properties>
@@ -30,13 +30,18 @@
     	</dependency>
     	
     	<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-security</artifactId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 		
 		<dependency>
@@ -68,3 +73,4 @@
 	</build>
 	
 </project>
+
