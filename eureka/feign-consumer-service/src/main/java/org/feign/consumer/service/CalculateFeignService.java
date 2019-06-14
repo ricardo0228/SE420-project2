@@ -5,26 +5,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "provider-service")
+@FeignClient(name = "provider-service" , fallback = FeignFallbackService.class)
+//@FeignClient(name = "provider-service")
 public interface CalculateFeignService {
 
     @RequestMapping(value = "/hello" , method = RequestMethod.GET)
     String hello(@RequestParam("name") String name);
-
+    
     @RequestMapping(value = "/add" , method = RequestMethod.GET)
-    int Add(@RequestParam("a") int a,
+    String Add(@RequestParam("a") int a,
             @RequestParam("b") int b);
 
     @RequestMapping(value = "/minus" , method = RequestMethod.GET)
-    int Minus(@RequestParam("a") int a,
+    String Minus(@RequestParam("a") int a,
               @RequestParam("b") int b);
 
     @RequestMapping(value = "/times" , method = RequestMethod.GET)
-    int Times(@RequestParam("a") int a,
+    String Times(@RequestParam("a") int a,
               @RequestParam("b") int b);
 
     @RequestMapping(value = "/divide" , method = RequestMethod.GET)
-    double Divide(@RequestParam("a") int a,
+    String Divide(@RequestParam("a") int a,
               @RequestParam("b") int b);
-    
+
+    @RequestMapping(value = "/testHystrix" , method = RequestMethod.GET)
+    String testHystrix(@RequestParam("name") String name);
 }

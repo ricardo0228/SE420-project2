@@ -14,16 +14,29 @@ public class IndexController {
     public String hello(String name){
         return feignService.hello(name);
     }
+    
+    @RequestMapping(value = "/add" , method = RequestMethod.GET)
+    public String add(int a, int b){
+        return feignService.Add(a, b);
+    }
 
-//    @Autowired private SpikeFeignService spikeFeignService;
-//
-//    @RequestMapping(value = "/health" , method = RequestMethod.GET)
-//    public String health(){
-//        return spikeFeignService.health();
-//    }
-//
-//    @RequestMapping(value = "/spike" , method = RequestMethod.GET)
-//    public String spike(){
-//        return spikeFeignService.spike();
-//    }
+    @RequestMapping(value = "/minus" , method = RequestMethod.GET)
+    public String minus(int a, int b){
+        return feignService.Minus(a, b);
+    }
+
+    @RequestMapping(value = "/times" , method = RequestMethod.GET)
+    public String times(int a, int b){
+        return feignService.Times(a, b);
+    }
+
+    @RequestMapping(value = "/divide" , method = RequestMethod.GET)
+    public String divide(int a, int b){
+        return feignService.Divide(a, b);
+    }
+
+    @RequestMapping(value = "/testHystrix" , method = RequestMethod.GET)
+    public String testHystrix(String name){
+        return feignService.testHystrix(name);
+    }
 }
