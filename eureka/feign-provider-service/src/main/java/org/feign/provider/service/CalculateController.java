@@ -1,45 +1,50 @@
 package org.feign.provider.service;
 
-import org.feign.provider.service.CalculateService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 public class CalculateController {
+    CalculateService cs = new CalculateService();
 
     @RequestMapping("/hello")
-    public String hello(String name){
-        CalculateService cs = new CalculateService();
-        String res=cs.hello(name);
-        return res;
+    public String hello(String name, HttpServletRequest request){
+        return  " From Port : " + request.getServerPort() + "\n" + cs.hello(name);
     }
     
     @RequestMapping("/add")
-    public int Add(int a, int b){   
-        CalculateService cs1 = new CalculateService();
-        int resu=cs1.add(a,b);
-        return  resu;
+    public String Add(int a, int b, HttpServletRequest request){   
+        int result=cs.add(a,b);
+        return  " From Port : " + request.getServerPort() + "\nValue : " + String.valueOf(result);
     }
 
     @RequestMapping("/minus")
-    public int Minus(int a, int b){   
-        CalculateService cs2 = new CalculateService();
-        int resul=cs2.minus(a,b);
-        return  resul;
+    public String Minus(int a, int b, HttpServletRequest request){   
+        int result=cs.minus(a,b);
+        return  " From Port : " + request.getServerPort() + "\nValue : " + String.valueOf(result);
     }
 
     @RequestMapping("/times")
-    public int Times(int a, int b){   
-        CalculateService cs3 = new CalculateService();
-        int result=cs3.times(a,b);
-        return result;
+    public String Times(int a, int b, HttpServletRequest request){   
+        int result=cs.times(a,b);
+        return  " From Port : " + request.getServerPort() + "\nValue : " + String.valueOf(result);
     }
 
     @RequestMapping("/divide")
-    public double Divide(int a, int b){   
-        CalculateService cs4 = new CalculateService();
-        int results=cs4.divide(a,b);
-        return results;
+    public String Divide(int a, int b, HttpServletRequest request){   
+    	double result=cs.divide(a,b);
+        return  " From Port : " + request.getServerPort() + "\nValue : " + String.valueOf(result);
     }
 
+    @RequestMapping("/testHystrix")
+    public String testHystrix(String name, HttpServletRequest request){   
+    	try {
+            Thread.sleep(5 * 1000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  " From Port : " + request.getServerPort() + "\nHello " + name + "! This is a test about Hystrix.";
+    }
 }
